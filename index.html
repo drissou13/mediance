@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>semaine </title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Numéro de la semaine</title>
+  <style>
+    body {
+      background: #f4f4f4;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .card h1 {
+      margin: 0 0 1rem;
+      font-size: 2rem;
+      color: #333;
+    }
+
+    .card .week-number {
+      font-size: 3rem;
+      color: #4CAF50;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Semaine</h1>
+    <div class="week-number" id="weekNumber">...</div>
+  </div>
+
+  <script>
+    function getWeekNumber(date) {
+      const target = new Date(date.valueOf());
+      const dayNr = (date.getDay() + 6) % 7;
+      target.setDate(target.getDate() - dayNr + 3);
+      const firstThursday = target.valueOf();
+      target.setMonth(0, 1);
+      const startDay = (target.getDay() + 6) % 7;
+      target.setDate(target.getDate() - startDay + 3);
+      const weekNumber = 1 + Math.round((firstThursday - target) / 604800000);
+      return weekNumber;
+    }
+
+    const today = new Date();
+    const weekNum = getWeekNumber(today);
+    document.getElementById('weekNumber').textContent = weekNum;
+  </script>
+
+</body>
+</html>
+<!-- partial -->
+  
+</body>
+</html>
